@@ -1,0 +1,31 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto mt-5 w-25 h-75">
+        <div class="card-body">
+            <h5 class="card-title"> {{ programs.title }}</h5>
+            <p class="card-text"> {{ programs.summary }}</p>
+        </div>
+        {% if episodes is  empty %}
+            <small>no  eposides</small>
+
+
+        {% else %}
+            <h3> Season N {{  season.number }}</h3>
+            <ul class="list-group list-group-flush">
+                {% for episode in episodes %}
+                    <li class="list-group-item"><a href="{{ path('show_season', {"id":episode.id}) }}">Episode {{ episode.number }} : {{ episode.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+
+
+
+    <button type="button" class="btn btn-lg round m-5">
+        <a href="{{ path('wild_index') }}"> Retour à l'accueil </a>
+    </button>
+{% endblock %}

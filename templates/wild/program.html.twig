@@ -1,0 +1,28 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <img src="{{ programs.poster }}" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="col-lg-6">
+                <div class="jumbotron">
+                    <h2 class="font-weight-bold display-3">{{ programs.title }}</h2>
+                    <hr class="my-4">
+                    <h4 class="display-4">Liste des saisons</h4>
+                </div>
+                {% for season in seasons %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Saison {{ loop.index }} ({{ season.year }})</h4>
+                            <p>{{ season.description }}</p>
+                            <a href="{{ path('show_season', {id:season.id}) }}" class="btn btn-primary stretched-link">Voir les épisodes</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
