@@ -23,6 +23,14 @@
                 <th>Poster</th>
                 <td>{{ program.poster }}</td>
             </tr>
+            <tr>
+                <th>actors</th>
+                <td>
+                {% for actor in program.actors %}
+                {{ actor.name }}-
+                {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
