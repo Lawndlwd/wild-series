@@ -42,7 +42,7 @@ class WildController extends AbstractController
      * Getting a program with a formatted slug for title
      *
      * @param string $slug The slugger
-     * @Route("wild/show/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="show")
+     * @Route("wild/show/{slug}", defaults={"slug" = null}, name="show")
      * @return Response
      */
     public function show(?string $slug):Response
@@ -74,7 +74,7 @@ class WildController extends AbstractController
      * Getting a program with a formatted slug for title
      *
      * @param string $slug The slugger
-     * @Route("wild/category/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="show_category")
+     * @Route("wild/category/{slug}", defaults={"slug" = null}, name="show_category")
      * @return Response
      */
     public function showByCategory(?string $slug):Response
@@ -111,7 +111,7 @@ class WildController extends AbstractController
      * Getting a season with a formatted slug for title
      *
      * @param string $slug The slugger
-     * @Route("wild/program/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="show_program")
+     * @Route("wild/program/{slug}", defaults={"slug" = null}, name="show_program")
      * @return Response
      */
     public function showByProgram(?string $slug):Response
@@ -181,8 +181,8 @@ class WildController extends AbstractController
         if (!$episode) {
             throw $this->createNotFoundException('No id has been sent to find seasons in season\'s table');
         }
-        $season = $episode->getSeasonId();
-        $program = $season->getProgramId();
+        $season = $episode->getSeason();
+        $program = $season->getProgram();
         return $this->render('wild/episode.html.twig', [
             'episode' => $episode,
             'season' => $season,
