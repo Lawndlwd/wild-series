@@ -36,6 +36,11 @@ class Episode
      * @ORM\Column(type="text", nullable=true)
      */
     private $synopsis;
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $slug;
+
 
     public function getId(): ?int
     {
@@ -88,5 +93,17 @@ class Episode
         $this->synopsis = $synopsis;
 
         return $this;
+    }
+
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+    public function getSlug(string $slug)
+    {
+        return $this->slug;
+
     }
 }

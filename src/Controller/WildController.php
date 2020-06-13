@@ -172,7 +172,7 @@ class WildController extends AbstractController
 
     /**
      * Getting episodes with an Id
-     * @Route("wild/episode/{id}", requirements={"id"="^[0-9]+$"}, defaults={"id"=null}, name="show_episode")
+     * @Route("wild/episode/{slug}", defaults={"slug"=null}, name="show_episode")
      * @param Episode $episode
      * @return Response A episode
      */
@@ -193,7 +193,7 @@ class WildController extends AbstractController
 
 
     /**
-     * @Route("/wild/actor/{id}", name="show_actor")
+     * @Route("/wild/actor/{slug}", name="show_actor")
      * @param Actor $actor
      * @return Response
      */

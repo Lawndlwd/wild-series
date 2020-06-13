@@ -63,6 +63,10 @@ class Program
      * @ORM\ManyToMany(targetEntity=Actor::class, mappedBy="program")
      */
     private $actors;
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -194,5 +198,17 @@ class Program
         }
 
         return $this;
+    }
+
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+    public function getSlug(string $slug)
+    {
+        return $this->slug;
+
     }
 }
