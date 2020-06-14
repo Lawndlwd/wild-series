@@ -111,7 +111,7 @@ class WildController extends AbstractController
      * Getting a season with a formatted slug for title
      *
      * @param string $slug The slugger
-     * @Route("wild/program/{slug}", defaults={"slug" = null}, name="show_program")
+     * @Route("wild/program/{slug}", defaults={"slug" = null}, name="show_programd")
      * @return Response
      */
     public function showByProgram(?string $slug):Response

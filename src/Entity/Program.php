@@ -206,7 +206,7 @@ class Program
 
         return $this;
     }
-    public function getSlug(string $slug)
+    public function getSlug()
     {
         return $this->slug;
 
