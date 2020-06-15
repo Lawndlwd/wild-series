@@ -4,12 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Actor;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Entity\User;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class WildController extends AbstractController
 {
@@ -172,21 +179,39 @@ class WildController extends AbstractController
 
     /**
      * Getting episodes with an Id
-     * @Route("wild/episode/{slug}", defaults={"slug"=null}, name="show_episode")
+     * @Route("wild/episode/{slug}", defaults={"slug"=null}, name="show_episode" ,requirements={"slug":"\d+"})
      * @param Episode $episode
+     * @param User $user
+     * @param Request $request
+     * @param CommentRepository $commentRepository
      * @return Response A episode
      */
-    public function showEpisode(Episode $episode): Response
+    public function showEpisode(Episode $episode, Request $request, CommentRepository $commentRepository): Response
     {
         if (!$episode) {
             throw $this->createNotFoundException('No id has been sent to find seasons in season\'s table');
         }
         $season = $episode->getSeason();
         $program = $season->getProgram();
+        $user =new User();
+        $comment = new Comment();
+        $form   = $this->createForm(CommentType::class,$comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comment->setAuthor($this->getUser());
+            $comment->setEpisode($episode);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+        }
+
         return $this->render('wild/episode.html.twig', [
             'episode' => $episode,
             'season' => $season,
             'program' => $program,
+            'comments' => $commentRepository->findBy(['episode' => $episode]),
+            'form' => $form->createView(),
         ]);
     }
 

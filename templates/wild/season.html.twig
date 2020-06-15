@@ -16,7 +16,7 @@
             <h3> Season N {{  season.number }}</h3>
             <ul class="list-group list-group-flush">
                 {% for episode in episodes %}
-                    <li class="list-group-item"><a href="{{ path('show_episode', {"id":episode.id}) }}">Episode {{ episode.number }} : {{ episode.title }}</a></li>
+                    <li class="list-group-item"><a href="{{ path('show_episode', {"slug":episode.slug}) }}">Episode {{ episode.number }} : {{ episode.title }}</a></li>
                 {% endfor %}
             </ul>
         {% endif %}

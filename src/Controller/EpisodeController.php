@@ -54,7 +54,7 @@ class EpisodeController extends AbstractController
     /**
      * @Route("/{id}", name="episode_show", methods={"GET"})
      */
-    public function show(Episode $episode): Response
+    public function show(Episode $episode, Request $request): Response
     {
         return $this->render('episode/show.html.twig', [
             'episode' => $episode,
