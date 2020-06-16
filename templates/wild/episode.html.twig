@@ -36,10 +36,9 @@
             <p>Auteur : {{ comment.author.email }}</p>
             <p>Commentaire : {{ comment.comment }}</p>
             <p>
-                {% for i in 1..comment.rate  %}
-                    <i class="fas fa-star"></i>
-                {% endfor %}
+                {{comment.rate}}
             </p>
+
             <hr>
         {% endfor %}
     </div>

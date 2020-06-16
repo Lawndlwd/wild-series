@@ -212,6 +212,7 @@ class WildController extends AbstractController
             'program' => $program,
             'comments' => $commentRepository->findBy(['episode' => $episode]),
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 
